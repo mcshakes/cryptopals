@@ -1,6 +1,5 @@
+import codecs
 import base64
-
-# Base64 is used to encode binary information and Hexadecimal is used to view the raw bytes.
 
 HEX_MAP = {
     '0': "0000",
@@ -23,11 +22,7 @@ HEX_MAP = {
 
 incoming = "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
 
-# Convert hexadecimal string to binary string
-
-# Split the binary string into 4 pieces of 6 bits each
-# Convert the binary string to decimal
-# Compare each decimal against each character in a reference string of 64 characters
+# Convert hexadecimal string units to bits or binary
 
 
 def hex_string_to_binary(hex_str: str) -> str:
@@ -38,7 +33,22 @@ def hex_string_to_binary(hex_str: str) -> str:
         binary_str = HEX_MAP[char]
         collection.append(binary_str)
 
-    print("".join(collection))
+    return "".join(collection)
+
+# split to 6 bits
 
 
-hex_string_to_binary(incoming)
+def split_binary(bin_str: str) -> str:
+    x = [bin_str[i:i+6] for i in range(0, len(bin_str), 6)]
+    return "".join(x)
+
+# Split the binary string into 4 pieces of 6 bits each
+# ASCII format that follows a Radix-64 representation. Each character is picked from a set of 64 characters, which means that I'll only need 6 bits represent each character because 26 = 64 characters.
+
+
+x = hex_string_to_binary(incoming)
+
+z = split_binary(x)
+# ans = base64.b64encode(z)
+print(z)
+# base64_convert(p)
